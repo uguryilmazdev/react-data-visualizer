@@ -15,8 +15,8 @@ export function ChannelProvider({children}) {
         setChannels(prevChannels => [...prevChannels,[]]);
     }
 
-    function removeChannel(index) {
-        setChannels(prevChannels => prevChannels.filter((_, i) => i !== index));
+    function removeChannel() {
+        setChannels(prevChannels => prevChannels.slice(0, -1));
     }
 
     function updateChannelValues(index, values) {

@@ -24,7 +24,7 @@ function Channel({ channelID }) {
     }, [randomNumbers]);
 
     return (
-    <div>
+    <article>
       <div className="border" style={{ display: 'flex' }}>
         {console.log(channelID)}
         {randomNumbers.map((number, index) => (
@@ -39,7 +39,7 @@ function Channel({ channelID }) {
           />
         ))}
       </div>
-    </div>
+    </article>
     )
 }
 

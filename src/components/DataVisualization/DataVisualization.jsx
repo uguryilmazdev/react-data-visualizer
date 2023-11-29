@@ -4,11 +4,7 @@ import Channel from "./Channel";
 import { useChannel } from "../../context/ChannelContext";
 
 function DataVisualization() {
-   const { channels, addChannel } = useChannel();
-
-  /*  useEffect(() => {
-        addChannel();
-    }, []); */
+   const { channels } = useChannel();
 
     // log channels
     useEffect(() => {
@@ -16,11 +12,11 @@ function DataVisualization() {
     }, [channels]);
 
     return (
-        <>
+        <section>
             {channels.map((channel, index) => (
                 <Channel key={index} channelID={index} />
             ))}
-        </>
+        </section>
     )
 }
 
