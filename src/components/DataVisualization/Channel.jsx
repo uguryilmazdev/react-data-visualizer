@@ -2,26 +2,40 @@
 import React, {useState, useEffect} from "react";
 import getRandomInt from "../../utils/randomGenerator";
 import { useChannel } from "../../context/ChannelContext";
+import { useGenerator } from "../../context/GeneratorContext"
 
 // eslint-disable-next-line react/prop-types
 function Channel({ channelID }) {
-    const { updateChannelValues } = useChannel();
+    const { isCleared, updateChannelValues } = useChannel();
+    const { isActive } = useGenerator();
     const [randomNumbers, setRandomNumbers] = useState([]);
 
     // Generate a random number within the spesified time interval
+    // Control start - stop button activity
     useEffect(() => {
-        const interval = setInterval(() => {
-            const newRandomNumber = getRandomInt(0, 10);
-            setRandomNumbers(prevNumbers => [...prevNumbers, newRandomNumber]);
-        }, 1000);
+        let interval;
+
+        if (isActive) {
+            interval = setInterval(() => {
+                const newRandomNumber = getRandomInt(0, 10);
+                setRandomNumbers(prevNumbers => [...prevNumbers, newRandomNumber]);
+            }, 1000);
+        }
 
         return () => clearInterval(interval);
-    }, []);
+    }, [isActive]);
 
     // Update channel values
     useEffect(() => {
             updateChannelValues(channelID, randomNumbers);
     }, [randomNumbers]);
+
+    // Clear random number
+    useEffect(() => {
+        if (isCleared) {
+            setRandomNumbers([]);
+        }
+    }, [isCleared])
 
     return (
     <article>

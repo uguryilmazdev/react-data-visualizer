@@ -10,6 +10,7 @@ export function useChannel() {
 // eslint-disable-next-line react/prop-types
 export function ChannelProvider({children}) {
     const [channels, setChannels] = useState([]);
+    const [isCleared, setIsCleared] = useState(false);
 
     function addChannel() {
         setChannels(prevChannels => [...prevChannels,[]]);
@@ -27,6 +28,14 @@ export function ChannelProvider({children}) {
         })
     }
 
+    function clearAllChannels() {
+        setIsCleared(true);
+
+        setTimeout(() => {
+            setIsCleared(false);
+          }, 500);
+      }
+
     function getAllChannelValues() {
         return channels;
     }
@@ -35,9 +44,11 @@ export function ChannelProvider({children}) {
         <ChannelContext.Provider
             value={{
                 channels,
+                isCleared,
                 addChannel,
                 removeChannel,
                 updateChannelValues,
+                clearAllChannels,
                 getAllChannelValues,
             }}
         >
