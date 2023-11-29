@@ -7,7 +7,7 @@ import { useGenerator } from "../../context/GeneratorContext"
 // eslint-disable-next-line react/prop-types
 function Channel({ channelID }) {
     const { isCleared, updateChannelValues } = useChannel();
-    const { isActive } = useGenerator();
+    const { isActive, timeInterval } = useGenerator();
     const [randomNumbers, setRandomNumbers] = useState([]);
 
     // Generate a random number within the spesified time interval
@@ -19,7 +19,7 @@ function Channel({ channelID }) {
             interval = setInterval(() => {
                 const newRandomNumber = getRandomInt(0, 10);
                 setRandomNumbers(prevNumbers => [...prevNumbers, newRandomNumber]);
-            }, 1000);
+            }, timeInterval);
         }
 
         return () => clearInterval(interval);

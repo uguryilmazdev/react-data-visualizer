@@ -1,11 +1,11 @@
 // eslint-disable-next-line no-unused-vars
-import React from "react";
+import React, {useState} from "react";
 import { useChannel } from "../../context/ChannelContext";
 import { useGenerator } from "../../context/GeneratorContext";
 
 function ControlPanel() {
     const { addChannel, removeChannel, clearAllChannels } = useChannel();
-    const { startGenerator, stopGenerator } = useGenerator();
+    const { timeInterval, handleTimeIntervalChange, startGenerator, stopGenerator } = useGenerator();
 
     return (
         <section>
@@ -16,6 +16,20 @@ function ControlPanel() {
                     stopGenerator();
                     clearAllChannels();
                 }}>Clear</button>
+            </div>
+            <div>
+                <label htmlFor="rangeInput">Choose Time Interval</label>
+                <input
+                    type="range"
+                    id="rangeInput"
+                    min="100"
+                    max="10000"
+                    step="100"
+                    value={timeInterval}
+                    onChange={handleTimeIntervalChange}
+                />
+                <br />
+                <span>Selected value: {timeInterval}</span>
             </div>
             <div>
                 <button onClick={addChannel}>Add Channel</button>

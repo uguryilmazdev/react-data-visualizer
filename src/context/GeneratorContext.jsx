@@ -10,6 +10,7 @@ export function useGenerator() {
 // eslint-disable-next-line react/prop-types
 export function GeneratorProvider({ children }) {
     const [isActive, setIsActive] = useState(false);
+    const [timeInterval, setTimeInterval] = useState(1000);
 
     function startGenerator() {
         setIsActive(true);
@@ -19,12 +20,18 @@ export function GeneratorProvider({ children }) {
         setIsActive(false);
     }
 
+    const handleTimeIntervalChange = (event) => {
+        setTimeInterval(event.target.value);
+      };
+
     return (
         <GeneratorContext.Provider
         value={{
             isActive,
+            timeInterval,
             startGenerator,
             stopGenerator,
+            handleTimeIntervalChange,
         }}>
             {children}
         </GeneratorContext.Provider>
