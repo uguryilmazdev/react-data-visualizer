@@ -17,7 +17,7 @@ export function GeneratorProvider({ children }) {
     // --- Control generator process - start / stop functionality
     function startGenerator() {
         // Check if lower boundry smaller than upper
-        if (randomMin < randomMax) {
+        if (parseInt(randomMin) < parseInt(randomMax)) {
             setIsActive(true);
         } else {
             alert("Lower boundry must be smaller than upper boundry!")
