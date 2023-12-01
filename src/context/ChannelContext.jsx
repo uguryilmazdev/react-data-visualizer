@@ -63,6 +63,7 @@ export function ChannelProvider({children}) {
         <ChannelContext.Provider
             value={{
                 channels,
+                setChannels,
                 isCleared,
                 channelHeight,
                 numberOfChannel,

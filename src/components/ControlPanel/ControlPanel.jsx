@@ -31,7 +31,7 @@ function ControlPanel() {
     return (
         <section className="control-panel-section d-flex flex-column flex-xl-row align-items-center justify-content-evenly p-3 rounded">
             <div className="d-flex flex-row">
-                <button className="btn btn-success mx-2 my-1" type="button" onClick={startGenerator}>Start</button>
+                <button className="btn btn-success mx-2 my-1" type="button" onClick={() => {startGenerator()}}>Start</button>
                 <button className="btn btn-danger mx-2 my-1" type="button" onClick={stopGenerator}>Stop</button>
                 <button className="btn btn-warning mx-2 my-1" type="button" onClick={() => {stopGenerator(); clearAllChannels();}}>Clear</button>
             </div>
@@ -60,7 +60,7 @@ function ControlPanel() {
             <div className="d-flex flex-column">
                 <button className="btn btn-primary mx-2 my-1 w-100" type="button" onClick={() => {const channels = getAllChannelValues(); exportToExcel(channels);}}>Save</button>
                 <div>
-                    <button onClick={() => {handleFileSelect(fileInputRef)}}>Load</button>
+                    <button  className="btn btn-primary mx-2 my-1 w-100" onClick={() => {handleFileSelect(fileInputRef)}}>Load</button>
                     <input type="file" ref={fileInputRef} style={{ display: 'none' }} onChange={async (e) => {handleFileChange(e), console.log(loadingData)}}/>
                 </div>
             </div>

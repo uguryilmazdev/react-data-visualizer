@@ -7,10 +7,10 @@ import { useChannel } from "../../context/ChannelContext";
 import { useGenerator } from "../../context/GeneratorContext"
 
 // eslint-disable-next-line react/prop-types
-function Channel({ channelID }) {
+function Channel({ channelID, data }) {
     const { isCleared, channelHeight, updateChannelValues } = useChannel();
     const { isActive, randomMin, randomMax, timeInterval } = useGenerator();
-    const [randomNumbers, setRandomNumbers] = useState([]);
+    const [randomNumbers, setRandomNumbers] = useState(data);
     const [channelColor, setChannelColor] = useState('#000');
     const channelRef = useRef(null);
 

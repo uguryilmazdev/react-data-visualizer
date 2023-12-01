@@ -33,6 +33,7 @@ export function LoadingDataProvider({ children }) {
         <LoadingDataContext.Provider
         value={{
             loadingData,
+            setLoadingData,
             handleFileSelect,
             handleFileChange,
         }}>

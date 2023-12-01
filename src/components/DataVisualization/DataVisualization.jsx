@@ -2,9 +2,21 @@
 import React, { useEffect } from "react";
 import Channel from "./Channel";
 import { useChannel } from "../../context/ChannelContext";
+import { useLoadingData } from "../../context/LoadingDataContext";
 
 function DataVisualization() {
-   const { channels } = useChannel();
+   const { channels, updateChannelValues, addChannel } = useChannel();
+   const { loadingData, setLoadingData } = useLoadingData();
+
+   useEffect(() => {
+        if (loadingData.length > 0) {
+            loadingData.map((channel, index) => {
+                addChannel(1);
+                updateChannelValues(index ,channel);
+            })
+            setLoadingData([]);
+        }
+   }, [loadingData])
 
     // log channels
     useEffect(() => {
@@ -14,7 +26,7 @@ function DataVisualization() {
     return (
         <section className="data-visualization-section mb-5">
             {channels.map((channel, index) => (
-                <Channel key={index} channelID={index} />
+                <Channel key={index} channelID={index} data={channel} />
             ))}
         </section>
     )

@@ -6,11 +6,11 @@ export default async function exportToExcel(channels) {
   const sheet = workbook.addWorksheet('Channels Data');
 
   // Header row
-  sheet.addRow(['Index', ...Array.from({ length: channels.length }, (_, i) => `Channel ${i + 1}`)]);
+  sheet.addRow([...Array.from({ length: channels.length }, (_, i) => `Channel ${i + 1}`)]);
 
   // Add values
   channels[0].forEach((_, rowIndex) => {
-    const rowData = [rowIndex + 1];
+    const rowData = [];
     channels.forEach((channel) => {
       rowData.push(channel[rowIndex]);
     });
