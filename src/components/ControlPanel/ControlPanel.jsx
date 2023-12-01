@@ -2,9 +2,17 @@
 import React, { useState } from "react";
 import { useChannel } from "../../context/ChannelContext";
 import { useGenerator } from "../../context/GeneratorContext";
+import exportToExcel from "../../utils/exportToExcel";
 
 function ControlPanel() {
-    const { addChannel, removeChannel, clearAllChannels, handleChannelNumber, numberOfChannel } = useChannel();
+    const {
+        addChannel,
+        removeChannel,
+        clearAllChannels,
+        handleChannelNumber,
+        numberOfChannel,
+        getAllChannelValues } = useChannel();
+
     const {
         timeInterval,
         randomMin,
@@ -45,6 +53,10 @@ function ControlPanel() {
                 </div>
                 <button className="btn btn-danger mx-2 my-1 w-100" type="button" onClick={removeChannel}>Remove Channel</button>
             </div>
+            <div className="d-flex flex-column">
+            <button className="btn btn-primary mx-2 my-1 w-100" type="button" onClick={() => {const channels = getAllChannelValues(); exportToExcel(channels);}}>Download</button>
+            </div>
+
         </section>
     )
 }
