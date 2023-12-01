@@ -13,10 +13,19 @@ export function ChannelProvider({children}) {
     const [channels, setChannels] = useState([]);
     const [isCleared, setIsCleared] = useState(false);
     const [channelHeight, setChannelHeight] = useState(200);
+    const [numberOfChannel, setNumberOfChannel] = useState(1);
 
-    function addChannel() {
-        setChannels(prevChannels => [...prevChannels,[]]);
-    }
+    function addChannel(numberOfChannel) {
+        setChannels(prevChannels => {
+          const newChannels = [...prevChannels];
+
+          for (let i = 0; i < numberOfChannel; i++) {
+            newChannels.push([]);
+          }
+
+          return newChannels;
+        });
+      }
 
     function removeChannel() {
         setChannels(prevChannels => prevChannels.slice(0, -1));
@@ -42,17 +51,23 @@ export function ChannelProvider({children}) {
         return channels;
     }
 
+    function handleChannelNumber(e) {
+        setNumberOfChannel(e.target.value);
+    }
+
     return (
         <ChannelContext.Provider
             value={{
                 channels,
                 isCleared,
                 channelHeight,
+                numberOfChannel,
                 addChannel,
                 removeChannel,
                 updateChannelValues,
                 clearAllChannels,
                 getAllChannelValues,
+                handleChannelNumber,
             }}
         >
             {children}
