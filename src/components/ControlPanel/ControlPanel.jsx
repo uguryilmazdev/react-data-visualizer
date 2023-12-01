@@ -1,7 +1,8 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
+import React, {useRef} from "react";
 import { useChannel } from "../../context/ChannelContext";
 import { useGenerator } from "../../context/GeneratorContext";
+import { useLoadingData } from "../../context/LoadingDataContext";
 import exportToExcel from "../../utils/exportToExcel";
 
 function ControlPanel() {
@@ -24,6 +25,9 @@ function ControlPanel() {
         stopGenerator
     } = useGenerator();
 
+    const {loadingData, handleFileSelect, handleFileChange} = useLoadingData();
+    const fileInputRef = useRef();
+
     return (
         <section className="control-panel-section d-flex flex-column flex-xl-row align-items-center justify-content-evenly p-3 rounded">
             <div className="d-flex flex-row">
@@ -37,11 +41,11 @@ function ControlPanel() {
                 <span className="text-light">{timeInterval}</span>
             </div>
             <div className="d-flex flex-column align-items-center justify-content-center my-1">
-                <div className="input-group mx-3 my-1 w-75">
+                <div className="input-group mx-3 my-1 w-50">
                     <span className="input-group-text">Lower Bound</span>
                     <input type="number" className="form-control" value={randomMin} onChange={(e) => {clearAllChannels(); handleRandomMinChange(e);}}/>
                 </div>
-                <div className="input-group mx-3 my-1 w-75">
+                <div className="input-group mx-3 my-1 w-50">
                     <span className="input-group-text">Upper Bound</span>
                     <input type="number" className="form-control" value={randomMax} onChange={(e) => {clearAllChannels(); handleRandomMaxChange(e);}}/>
                 </div>
@@ -54,7 +58,11 @@ function ControlPanel() {
                 <button className="btn btn-danger mx-2 my-1 w-100" type="button" onClick={removeChannel}>Remove Channel</button>
             </div>
             <div className="d-flex flex-column">
-            <button className="btn btn-primary mx-2 my-1 w-100" type="button" onClick={() => {const channels = getAllChannelValues(); exportToExcel(channels);}}>Download</button>
+                <button className="btn btn-primary mx-2 my-1 w-100" type="button" onClick={() => {const channels = getAllChannelValues(); exportToExcel(channels);}}>Save</button>
+                <div>
+                    <button onClick={() => {handleFileSelect(fileInputRef)}}>Load</button>
+                    <input type="file" ref={fileInputRef} style={{ display: 'none' }} onChange={async (e) => {handleFileChange(e), console.log(loadingData)}}/>
+                </div>
             </div>
 
         </section>
