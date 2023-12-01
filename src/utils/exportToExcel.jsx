@@ -1,6 +1,7 @@
 import ExcelJS from 'exceljs';
 import { saveAs } from 'file-saver';
 
+// This function provides export data to Excel using ExcelJS and file-saver
 export default async function exportToExcel(channels) {
   const workbook = new ExcelJS.Workbook();
   const sheet = workbook.addWorksheet('Channels Data');

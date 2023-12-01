@@ -1,6 +1,9 @@
 import { useChannel } from "../../context/ChannelContext"
 
 // eslint-disable-next-line react/prop-types
+// --
+// This component provides add - remove channel functions.
+// It allows to users to create as many channels as they want.
 export default function ChannelControl() {
     const { addChannel, numberOfChannel, handleChannelNumber, removeChannel } = useChannel();
 

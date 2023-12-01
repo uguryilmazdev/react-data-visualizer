@@ -6,6 +6,8 @@ import randomColorGenerator from "../../utils/randomColorGenerator";
 import { useChannel } from "../../context/ChannelContext";
 import { useGenerator } from "../../context/GeneratorContext"
 
+// This component provides a new channel container.
+// It is a horizontal streamline.
 // eslint-disable-next-line react/prop-types
 function Channel({ channelID, data }) {
     const { isCleared, channelHeight, updateChannelValues } = useChannel();
@@ -14,14 +16,15 @@ function Channel({ channelID, data }) {
     const [channelColor, setChannelColor] = useState('#000');
     const channelRef = useRef(null);
 
-    // generate random color for channel
+    // Generate random color for channel when the component's first render.
+    // Random color effects channel border.
     useEffect(() => {
       const color = randomColorGenerator();
       setChannelColor(color);
     }, []);
 
-    // Generate a random number within the spesified time interval
-    // Control start - stop button activity
+    // Generate a random number within the specified time interval
+    // If it is started (start button is pressed), generator begins.
     useEffect(() => {
         let interval;
 

@@ -1,6 +1,9 @@
 import { useGenerator } from "../../context/GeneratorContext"
 
 // eslint-disable-next-line react/prop-types
+// --
+// This component provides time interval functionality
+// Time interval was set between 100 - 10000 ms with 100 steps.
 export default function TimeIntervalControl() {
     const { timeInterval, handleTimeIntervalChange } = useGenerator();
 

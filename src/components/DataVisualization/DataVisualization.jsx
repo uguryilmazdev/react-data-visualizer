@@ -4,10 +4,12 @@ import Channel from "./Channel";
 import { useChannel } from "../../context/ChannelContext";
 import { useLoadingData } from "../../context/LoadingDataContext";
 
+// This component provides main container for all channels.
 function DataVisualization() {
    const { channels, updateChannelValues } = useChannel();
    const { loadingData, setLoadingData } = useLoadingData();
 
+   // Catch loading data and load it to channels.
    useEffect(() => {
 
         if (loadingData.length > 0) {
@@ -17,11 +19,6 @@ function DataVisualization() {
             setLoadingData([]);
         }
    }, [loadingData])
-
-    // log channels
-    useEffect(() => {
-        console.log('All channels:', channels);
-    }, [channels]);
 
     return (
         <section className="data-visualization-section mb-5">

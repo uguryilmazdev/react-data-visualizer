@@ -1,5 +1,6 @@
 import ExcelJS from 'exceljs';
 
+// This function provides import data from Excel using ExcelJs
 export default async function importFromExcel(file) {
   try {
     const workbook = new ExcelJS.Workbook();

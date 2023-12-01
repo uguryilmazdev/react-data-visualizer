@@ -2,6 +2,9 @@ import { useChannel } from "../../context/ChannelContext";
 import { useGenerator } from "../../context/GeneratorContext";
 
 // eslint-disable-next-line react/prop-types
+// --
+// This component provides lower and upper boundry of random data generator.
+// Changing boundries clear channels for consistent data graphs.
 export default function BoundryControl() {
     const { clearAllChannels, } = useChannel();
     const { randomMin, randomMax, handleRandomMinChange, handleRandomMaxChange } = useGenerator();

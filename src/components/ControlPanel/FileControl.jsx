@@ -4,6 +4,9 @@ import { useLoadingData } from "../../context/LoadingDataContext";
 import exportToExcel from "../../utils/exportToExcel";
 
 // eslint-disable-next-line react/prop-types
+// --
+// This component provides file management.
+// It allows save and load function.
 export default function FileControl() {
     const { getAllChannelValues, setChannels } = useChannel();
     const { loadingData, handleFileSelect, handleFileChange } = useLoadingData();
