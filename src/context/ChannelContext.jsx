@@ -16,15 +16,19 @@ export function ChannelProvider({children}) {
     const [numberOfChannel, setNumberOfChannel] = useState(1);
 
     function addChannel(numberOfChannel) {
-        setChannels(prevChannels => {
-          const newChannels = [...prevChannels];
+        if (numberOfChannel > 0) {
+            setChannels(prevChannels => {
+                const newChannels = [...prevChannels];
 
-          for (let i = 0; i < numberOfChannel; i++) {
-            newChannels.push([]);
-          }
+                for (let i = 0; i < numberOfChannel; i++) {
+                  newChannels.push([]);
+                }
 
-          return newChannels;
-        });
+                return newChannels;
+              });
+        } else {
+            alert("Number of channel must be bigger than zero!")
+        }
       }
 
     function removeChannel() {

@@ -20,7 +20,7 @@ export function GeneratorProvider({ children }) {
         if (randomMin < randomMax) {
             setIsActive(true);
         } else {
-            console.log("Lower boundry must be smaller than upper boundry!")
+            alert("Lower boundry must be smaller than upper boundry!")
         }
     }
 
@@ -39,7 +39,7 @@ export function GeneratorProvider({ children }) {
         if (!isNaN(e.target.value) && e.target.value >= 0) {
             setRandomMin(e.target.value);
         } else {
-            console.log("Lower bound must be positive zero or positive integer!")
+            alert("Lower bound must be positive zero or positive integer!")
         }
     }
 
@@ -48,7 +48,7 @@ export function GeneratorProvider({ children }) {
         if (!isNaN(e.target.value) && e.target.value >= 0) {
             setRandomMax(e.target.value);
         } else {
-            console.log("Upper bound must be positive integer!")
+            alert("Upper bound must be positive integer!")
         }
     }
 
