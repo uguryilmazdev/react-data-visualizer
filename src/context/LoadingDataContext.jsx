@@ -17,10 +17,12 @@ export function LoadingDataProvider({ children }) {
         fileInput.click();
       }
 
-    async function handleFileChange(event) {
+    async function handleFileChange(event, setChannels) {
         const file = event.target.files[0];
         if (file) {
             try {
+              // clear channels
+              setChannels([]);
               const excelData = await importFromExcel(file);
               setLoadingData(excelData);
             } catch (error) {

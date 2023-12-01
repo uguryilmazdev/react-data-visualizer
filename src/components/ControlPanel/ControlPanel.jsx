@@ -7,6 +7,7 @@ import exportToExcel from "../../utils/exportToExcel";
 
 function ControlPanel() {
     const {
+        setChannels,
         addChannel,
         removeChannel,
         clearAllChannels,
@@ -61,7 +62,7 @@ function ControlPanel() {
                 <button className="btn btn-primary mx-2 my-1 w-100" type="button" onClick={() => {const channels = getAllChannelValues(); exportToExcel(channels);}}>Save</button>
                 <div>
                     <button  className="btn btn-primary mx-2 my-1 w-100" onClick={() => {handleFileSelect(fileInputRef)}}>Load</button>
-                    <input type="file" ref={fileInputRef} style={{ display: 'none' }} onChange={async (e) => {handleFileChange(e), console.log(loadingData)}}/>
+                    <input type="file" ref={fileInputRef} style={{ display: 'none' }} onChange={async (e) => {handleFileChange(e, setChannels), console.log(loadingData)}}/>
                 </div>
             </div>
 

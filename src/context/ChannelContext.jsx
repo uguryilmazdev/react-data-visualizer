@@ -43,7 +43,7 @@ export function ChannelProvider({children}) {
         })
     }
 
-    function clearAllChannels() {
+    async function clearAllChannels() {
         setIsCleared(true);
 
         setTimeout(() => {

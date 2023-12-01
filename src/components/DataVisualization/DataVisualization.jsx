@@ -5,13 +5,13 @@ import { useChannel } from "../../context/ChannelContext";
 import { useLoadingData } from "../../context/LoadingDataContext";
 
 function DataVisualization() {
-   const { channels, updateChannelValues, addChannel } = useChannel();
+   const { channels, updateChannelValues } = useChannel();
    const { loadingData, setLoadingData } = useLoadingData();
 
    useEffect(() => {
+
         if (loadingData.length > 0) {
             loadingData.map((channel, index) => {
-                addChannel(1);
                 updateChannelValues(index ,channel);
             })
             setLoadingData([]);
