@@ -1,14 +1,24 @@
 // eslint-disable-next-line no-unused-vars
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import getRandomInt from "../../utils/randomGenerator";
+import normalizeChannelHeight from "../../utils/normalizeChannelHeight";
+import randomColorGenerator from "../../utils/randomColorGenerator";
 import { useChannel } from "../../context/ChannelContext";
 import { useGenerator } from "../../context/GeneratorContext"
 
 // eslint-disable-next-line react/prop-types
 function Channel({ channelID }) {
-    const { isCleared, updateChannelValues } = useChannel();
+    const { isCleared, channelHeight, updateChannelValues } = useChannel();
     const { isActive, randomMin, randomMax, timeInterval } = useGenerator();
     const [randomNumbers, setRandomNumbers] = useState([]);
+    const [channelColor, setChannelColor] = useState('#000');
+    const channelRef = useRef(null);
+
+    // generate random color for channel
+    useEffect(() => {
+      const color = randomColorGenerator();
+      setChannelColor(color);
+    }, []);
 
     // Generate a random number within the spesified time interval
     // Control start - stop button activity
@@ -19,6 +29,11 @@ function Channel({ channelID }) {
             interval = setInterval(() => {
                 const newRandomNumber = getRandomInt(randomMin, randomMax);
                 setRandomNumbers(prevNumbers => [...prevNumbers, newRandomNumber]);
+
+                // Activate channel's horizontal scroll while adding new bars.
+                if (channelRef.current) {
+                  channelRef.current.scrollLeft += 25;
+                }
             }, timeInterval);
         }
 
@@ -38,22 +53,22 @@ function Channel({ channelID }) {
     }, [isCleared])
 
     return (
-    <article>
-      <div className="border" style={{ display: 'flex' }}>
-        {console.log(channelID)}
-        {randomNumbers.map((number, index) => (
+      // Here, channel-container height is tricky:
+      // 200px maximum bar height; 24 px bar number height; 8px overflow height; 3*2 px border height = 200px + 38px total height
+      // so we need extra 38px.
+      // This is not best practice. It should be reviewed.
+    <div className="channel-container d-flex align-items-end mb-5" ref={channelRef} style={{ height: `${channelHeight + 38}px`,borderColor: channelColor}}>
+      {randomNumbers.map((number, index) => (
+        <div key={index} className="d-flex flex-column align-items-center justify-content-center me-3">
           <div
-            key={index}
-            style={{
-              height: `${number * 20}px`,
-              width: '20px',
-              backgroundColor: 'blue',
-              marginRight: '5px',
-            }}
-          />
-        ))}
-      </div>
-    </article>
+            className="text-bg-primary"
+            style={{height: `${normalizeChannelHeight(number, randomMin, randomMax, channelHeight)}px`, minWidth: '20px'}}
+          >
+          </div>
+          <div>{number}</div>
+        </div>
+      ))}
+    </div>
     )
 }
 

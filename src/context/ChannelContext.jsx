@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // eslint-disable-next-line no-unused-vars
 import React, {createContext, useContext, useState} from "react";
 
@@ -11,6 +12,7 @@ export function useChannel() {
 export function ChannelProvider({children}) {
     const [channels, setChannels] = useState([]);
     const [isCleared, setIsCleared] = useState(false);
+    const [channelHeight, setChannelHeight] = useState(200);
 
     function addChannel() {
         setChannels(prevChannels => [...prevChannels,[]]);
@@ -45,6 +47,7 @@ export function ChannelProvider({children}) {
             value={{
                 channels,
                 isCleared,
+                channelHeight,
                 addChannel,
                 removeChannel,
                 updateChannelValues,

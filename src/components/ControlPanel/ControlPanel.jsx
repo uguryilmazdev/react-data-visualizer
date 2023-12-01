@@ -17,28 +17,30 @@ function ControlPanel() {
     } = useGenerator();
 
     return (
-        <section>
-            <div>
-                <button onClick={startGenerator}>Start</button>
-                <button onClick={stopGenerator}>Stop</button>
-                <button onClick={() => { stopGenerator(); clearAllChannels(); }}>Clear</button>
+        <section className="control-panel-section d-flex flex-column flex-xl-row align-items-center justify-content-evenly p-3 rounded">
+            <div className="d-flex flex-row">
+                <button className="btn btn-success mx-2 my-1" onClick={startGenerator}>Start</button>
+                <button className="btn btn-danger mx-2 my-1" onClick={stopGenerator}>Stop</button>
+                <button className="btn btn-warning mx-2 my-1" onClick={() => {stopGenerator(); clearAllChannels();}}>Clear</button>
             </div>
-            <div>
-                <div>
-                    <label htmlFor="timeIntervalSelector">Choose Time Interval</label>
-                    <input type="range" id="timeIntervalSelector" min="100" max="10000" step="100" value={timeInterval} onChange={handleTimeIntervalChange}
-                    />
-                    <br />
-                    <span>Selected value: {timeInterval}</span>
+            <div className="d-flex flex-column align-items-center">
+                <label htmlFor="timeIntervalSelector" className="text-light">Choose Time Interval</label>
+                <input type="range" id="timeIntervalSelector" min="100" max="10000" step="100" value={timeInterval} onChange={handleTimeIntervalChange}/>
+                <span className="text-light">{timeInterval}</span>
+            </div>
+            <div className="d-flex flex-column align-items-center justify-content-center my-1">
+                <div className="input-group mx-3 my-1 w-75">
+                    <span className="input-group-text">Lower Bound</span>
+                    <input type="number" className="form-control" value={randomMin} onChange={(e) => {clearAllChannels(); handleRandomMinChange(e);}}/>
                 </div>
-                <div>
-                    <input type="number" value={randomMin} onChange={handleRandomMinChange}/>
-                    <input type="number" value={randomMax} onChange={handleRandomMaxChange}/>
+                <div className="input-group mx-3 my-1 w-75">
+                    <span className="input-group-text">Upper Bound</span>
+                    <input type="number" className="form-control" value={randomMax} onChange={(e) => {clearAllChannels(); handleRandomMaxChange(e);}}/>
                 </div>
             </div>
-            <div>
-                <button onClick={addChannel}>Add Channel</button>
-                <button onClick={removeChannel}>Remove Channel</button>
+            <div className="d-flex flex-column">
+                <button className="btn btn-success mx-2 my-1 w-100" onClick={addChannel}>Add Channel</button>
+                <button className="btn btn-danger mx-2 my-1 w-100" onClick={removeChannel}>Remove Channel</button>
             </div>
         </section>
     )

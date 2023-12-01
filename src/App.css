@@ -1,0 +1,53 @@
+main {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50fr 1fr;
+    max-height: 100vh;
+    padding: 2rem;
+    background-color: #DDF2FD;
+}
+
+.data-visualization-section {
+    background-color: #9BBEC8;
+    overflow: auto;
+}
+
+.control-panel-section {
+    align-self: end;
+    background-color: rgb(22, 72, 99);
+}
+
+.channel-container {
+    min-width: 100%;
+    overflow:auto;
+    border: 3px solid;
+}
+
+#timeIntervalSelector {
+    width: 15rem;
+}
+
+.btn {
+    width: 5rem;
+    text-align: center;
+}
+
+/* scrollbar style */
+::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(22, 72, 99);
+  }
+  ::-webkit-scrollbar-thumb:window-inactive {
+    background: #DDF2FD;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #DDF2FD;
+  }
+
+

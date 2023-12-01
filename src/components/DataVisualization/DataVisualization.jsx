@@ -12,7 +12,7 @@ function DataVisualization() {
     }, [channels]);
 
     return (
-        <section>
+        <section className="data-visualization-section mb-5">
             {channels.map((channel, index) => (
                 <Channel key={index} channelID={index} />
             ))}
